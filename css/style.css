@@ -1,0 +1,73 @@
+body {
+    background-color: #FAFAFA;
+}
+
+canvas {
+
+}
+
+#radar {
+
+}
+
+@keyframes zoomIn {
+   from {
+       transform: scale(0);
+   }
+   to {
+       transform: scale(1);
+   }
+}
+
+/* login */
+#login {
+    /*display: none;*/
+    display: block;
+    padding: 80px 30px 60px 30px;
+}
+
+#login .mdui-container-fluid {
+    color: #243743;
+    text-align: center;
+}
+
+#login a {
+    text-decoration: none;
+    color: #28b78d;
+}
+
+#login .mdui-btn {
+    background-color: #28B78D;
+    color: white;
+    margin-top: 2em;
+    font-weight: 300;
+}
+
+/* wait */
+#wait {
+    display: none;
+    margin-top: 300px;
+    text-align: center;
+}
+
+#wait div {
+    color: #28B78D;
+}
+
+/* main */
+#main {
+    display: none;
+    /*display: block;*/
+    padding: 0;
+}
+
+#main .mdui-container{
+    margin-top: 1em;
+}
+
+.violationRow {
+    margin: 1em;
+    text-align: center;
+}
+
+

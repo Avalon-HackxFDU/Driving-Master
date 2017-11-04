@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" id="viewport" content="width=device-width, initial-scale=1">
+    <title>Driving Master</title>
+    <link type="text/css" rel="stylesheet" href="css/mdui.css">
+    <link type="text/css" rel="stylesheet" href="css/style.css">
+</head>
+<body class="mdui-theme-accent-teal mdui-theme-primary-teal">
+    <div class="mdui-container" id="login">
+        <div class="mdui-container-fluid">
+            <div class="mdui-typo-display-1">登录</div>
+            <div class="mdui-typo-subheading"><br>开车大师，从不翻车</div>
+        </div>
+        <div class="mdui-textfield mdui-textfield-floating-label">
+            <i class="mdui-icon material-icons">person</i>
+            <label class="mdui-textfield-label">手机号</label>
+            <textarea class="mdui-textfield-input"></textarea>
+        </div>
+        <div class="mdui-textfield mdui-textfield-floating-label">
+            <i class="mdui-icon material-icons">lock</i>
+            <label class="mdui-textfield-label">密码</label>
+            <input class="mdui-textfield-input" type="password">
+        </div>
+        <div class="mdui-container-fluid">
+            <div class="mdui-row">
+                <div class="mdui-col-xs-3">
+                    <a href="#" class="mdui-typo-caption"><br>创建账号</a>
+                </div>
+                <div class="mdui-col-xs-3 mdui-col-offset-xs-6">
+                    <a href="#" class="mdui-typo-caption"><br>忘记密码?</a>
+                </div>
+            </div>
+        </div>
+        <button class="mdui-btn mdui-btn-raised mdui-ripple mdui-float-right" onclick="login()">登录</button>
+    </div>
+
+    <div class="mdui-container" id="wait">
+        <div class="mdui-spinner mdui-center"></div>
+        <div class="mdui-typo-body-1 mdui-center"><br>正在登录中...</div>
+    </div>
+
+    <div class="mdui-container-fluid" id="main">
+        <img src="images/header.png" class="mdui-img-fluid" />
+        <div class="mdui-container">
+            <div class="mdui-panel" mdui-panel>
+                <div class="mdui-panel-item">
+                    <div class="mdui-panel-item-header">
+                        <div class="mdui-panel-item-title"><i class="mdui-icon material-icons">account_circle</i></div>
+                        <div class="mdui-panel-item-summary">用户信息</div>
+                        <i class="mdui-panel-item-arrow mdui-icon material-icons">keyboard_arrow_down</i>
+                    </div>
+                    <div class="mdui-panel-item-body">
+                        <ul class="mdui-list">
+                            <li class="mdui-list-item">
+                                <div class="mdui-list-item-avatar"><i class="mdui-icon material-icons">account_box</i></div>
+                                <div class="mdui-list-item-content">
+                                    <div class="mdui-list-item-title">姓名</div>
+                                    <div class="mdui-list-item-text mdui-list-item-one-line" id="fullname"></div>
+                                </div>
+                            </li>
+                            <li class="mdui-list-item">
+                                <div class="mdui-list-item-avatar"><i class="mdui-icon material-icons">featured_play_list</i></div>
+                                <div class="mdui-list-item-content">
+                                    <div class="mdui-list-item-title">驾照扣分情况</div>
+                                    <div class="mdui-list-item-text mdui-list-item-one-line" id="licenseinfo"></div>
+                                </div>
+                            </li>
+                            <li class="mdui-list-item">
+                                <div class="mdui-list-item-avatar"><i class="mdui-icon material-icons">local_car_wash</i></div>
+                                <div class="mdui-list-item-content">
+                                    <div class="mdui-list-item-title">车辆保养情况</div>
+                                    <div class="mdui-list-item-text mdui-list-item-one-line" id="carinfo"></div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="mdui-panel-item">
+                    <div class="mdui-panel-item-header" onclick="displayRadar()">
+                        <div class="mdui-panel-item-title"><i class="mdui-icon material-icons">directions_car</i></div>
+                        <div class="mdui-panel-item-summary">行车个性</div>
+                        <i class="mdui-panel-item-arrow mdui-icon material-icons">keyboard_arrow_down</i>
+                    </div>
+                    <div class="mdui-panel-item-body" id="characteristic">
+                    </div>
+                </div>
+
+                <div class="mdui-panel-item">
+                    <div class="mdui-panel-item-header">
+                        <div class="mdui-panel-item-title"><i class="mdui-icon material-icons">error</i></div>
+                        <div class="mdui-panel-item-summary">违章记录</div>
+                        <i class="mdui-panel-item-arrow mdui-icon material-icons">keyboard_arrow_down</i>
+                    </div>
+                    <div class="mdui-panel-item-body">
+                        <div class="mdui-typo-title">这个月</div>
+                        <div class="mdui-row violationRow">
+                            <div class="mdui-col-xs-6">
+                                <img src="images/crushing.png" />
+                                <div class="mdui-typo-body-2">双车事故<br>2次</div>
+                            </div>
+                            <div class="mdui-col-xs-6">
+                                <img src="images/violating.png" />
+                                <div class="mdui-typo-body-2">装备违规<br>1次</div>
+                        </div>
+                    </div>
+                        <div class="mdui-typo-title">易犯错误:</div>
+                        <ul class="mdui-list" id="violationList">
+                        </ul>
+                </div>
+                </div>
+
+
+
+
+
+                <div class="mdui-panel-item">
+                    <div class="mdui-panel-item-header">
+                        <div class="mdui-panel-item-title"><i class="mdui-icon material-icons">language</i></div>
+                        <div class="mdui-panel-item-summary">已绑车辆</div>
+                        <i class="mdui-panel-item-arrow mdui-icon material-icons">keyboard_arrow_down</i>
+                    </div>
+                    <div class="mdui-panel-item-body">
+                        <ul class="mdui-list" id="deviceList">
+                        </ul>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+<script src="js/jquery-3.1.1.js"></script>
+<script src="js/mdui.js"></script>
+<script src="js/script.js"></script>
+</body>
+</html>
