@@ -2,11 +2,13 @@
  * Created by billyzou on 2017/11/4.
  */
 var jsonPack;
+var username;
 
 function login() {
     document.getElementById('login').style.display = 'none';
     document.getElementById('wait').style.display = 'block';
-    $.get("http://oldcar-ssl.smartgslb.com/getUserInfo/?id=1026", function(data, status) {
+    username = document.getElementById('username').value;
+    $.get("http://oldcar-ssl.smartgslb.com/getUserInfo/?id=" + username, function(data, status) {
         document.getElementById('wait').style.display = 'none';
         document.getElementById('main').style.display = 'block';
         document.body.style.backgroundColor = '#8A949B';
@@ -14,10 +16,6 @@ function login() {
         console.log(jsonPack);
         addElements(jsonPack);
     });
-}
-
-function mainInterface() {
-    document.getElementById('wait').style.display = 'none';
 }
 
 function addElements(data) {
@@ -170,6 +168,7 @@ function addElements(data) {
 
 /* 绘制违章记录 */
     var i = 0;
+    var j = 0;
     var maxTag = 0;
 
     for (var key in jsonPack.tags) {
@@ -181,6 +180,7 @@ function addElements(data) {
     for (var key in jsonPack.tags) {
         var newDiv = document.createElement('div');
         newDiv.className = 'mdui-chip';
+        newDiv.style.margin = '4px 2px';
         var newSpan = document.createElement('span');
         newSpan.className = 'mdui-chip-title';
         newSpan.innerText = key;
@@ -188,6 +188,9 @@ function addElements(data) {
         var opacity = jsonPack.tags[key] / maxTag;
         newDiv.style.backgroundColor = 'rgba(40, 183, 141, ' + opacity + ')';
         document.getElementById('cloud').appendChild(newDiv);
+        if (++j == 10) {
+            break;
+        }
     }
 
     for (var key in jsonPack.events){
@@ -251,6 +254,17 @@ function addElements(data) {
         newLi.appendChild(newIcon);
         document.getElementById('deviceList').appendChild(newLi);
     }
+    var newLi = document.createElement('li');
+    newLi.className = 'mdui-list-item';
+    var newIcon = document.createElement('i');
+    newIcon.className = 'mdui-list-item-icon mdui-icon material-icons';
+    newIcon.innerText = 'camera_alt';
+    newLi.appendChild(newIcon);
+    var newDiv = document.createElement('div');
+    newDiv.className = "mdui-list-item-content";
+    newDiv.innerText = '添加车辆...';
+    newLi.appendChild(newDiv);
+    document.getElementById('deviceList').appendChild(newLi);
 }
 
 function displayRadar() {
