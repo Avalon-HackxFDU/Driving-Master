@@ -6,7 +6,7 @@ var jsonPack;
 function login() {
     document.getElementById('login').style.display = 'none';
     document.getElementById('wait').style.display = 'block';
-    $.get("https://nekoweb.000webhostapp.com/oldcar/getUserInfo/?id=1024", function(data, status) {
+    $.get("http://oldcar-ssl.smartgslb.com/getUserInfo/?id=1026", function(data, status) {
         document.getElementById('wait').style.display = 'none';
         document.getElementById('main').style.display = 'block';
         document.body.style.backgroundColor = '#8A949B';
@@ -170,6 +170,26 @@ function addElements(data) {
 
 /* 绘制违章记录 */
     var i = 0;
+    var maxTag = 0;
+
+    for (var key in jsonPack.tags) {
+        if (jsonPack.tags[key] > maxTag) {
+            maxTag = jsonPack.tags[key];
+        }
+    }
+
+    for (var key in jsonPack.tags) {
+        var newDiv = document.createElement('div');
+        newDiv.className = 'mdui-chip';
+        var newSpan = document.createElement('span');
+        newSpan.className = 'mdui-chip-title';
+        newSpan.innerText = key;
+        newDiv.appendChild(newSpan);
+        var opacity = jsonPack.tags[key] / maxTag;
+        newDiv.style.backgroundColor = 'rgba(40, 183, 141, ' + opacity + ')';
+        document.getElementById('cloud').appendChild(newDiv);
+    }
+
     for (var key in jsonPack.events){
         if (i === 0) {
             var newLi = document.createElement('li');
